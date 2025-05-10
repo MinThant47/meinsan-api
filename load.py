@@ -4,8 +4,10 @@ from langchain_community.vectorstores import FAISS
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from llm_and_route_query import llm
 import os
+from dotenv import load_dotenv
 
-os.environ["GOOGLE_API_KEY"]= "AIzaSyC87rM9xeEqJ6Rt5LhguLed6QK5mzT6XBM"
+load_dotenv()
+os.environ["GOOGLE_API_KEY"]
 
 embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
 
@@ -21,5 +23,3 @@ def get_context(index_path, question, sample_prompt, chat_history):
     retrieval_chain=create_retrieval_chain(retriever,document_chain)
     response=retrieval_chain.invoke({'input':question, "chat_history": chat_history})
     return response
-
-response = get_context("YTUFAQ", question, prompt, chat_history)
