@@ -3,8 +3,10 @@ from langchain_community.vectorstores import FAISS
 from langchain_community.document_loaders import TextLoader
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 import os
+from dotenv import load_dotenv
 
-os.environ["GOOGLE_API_KEY"]= "AIzaSyC87rM9xeEqJ6Rt5LhguLed6QK5mzT6XBM"
+load_dotenv()
+os.environ["GOOGLE_API_KEY"]
 
 def vector_embedding(file_path, name):
 

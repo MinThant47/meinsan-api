@@ -4,8 +4,10 @@ from pydantic import BaseModel, Field
 from typing import Literal
 from langchain_google_genai import ChatGoogleGenerativeAI
 import os
+from dotenv import load_dotenv
 
-os.environ["GOOGLE_API_KEY"]= "AIzaSyC87rM9xeEqJ6Rt5LhguLed6QK5mzT6XBM"
+load_dotenv()
+os.environ["GOOGLE_API_KEY"]
 
 llm = ChatGoogleGenerativeAI(
     model="gemini-2.0-flash-001",
@@ -62,7 +64,8 @@ prompt = {
         You help users choose a suitable major or field based on their preferences only related with engineering.
         If the user asks field apart from engineering and technology, please reply them that you can only recommend engineering majors
         If a user asks for a recommendation, first ask them for their interests or preferences before giving an answer.
-        But don't say words like according to provided text.
+        Recommend them with the following majors:
+        Civil, Electrical Power, Electronic, Telecommunication, Chemical, Food, Petroleum, Mechanical, Computer Engineering and Information Technology (CEIT), Metallurgical and Materials, Textile, Mining,  Mechatronic, and Architecture,
         Please reply only in BURMESE"""),
         MessagesPlaceholder(variable_name="chat_history"),
         ("human", "{input}")
