@@ -1,12 +1,16 @@
 from upstash_redis import Redis
 import json
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 #aungkyawkyawsoe
-redis = Redis(url="https://wise-ladybug-34655.upstash.io", token="AYdfAAIjcDFlN2NlYTQwMTY4MmI0NWU4YTlkZjExOGE0YjEyYjcxOXAxMA")
+redis = Redis(url=os.getenv("REDIS_URL"), token=os.getenv("REDIS_TOKEN"))
 
 from langchain.schema import HumanMessage, AIMessage
 
-CHAT_KEY = "meisan"
+CHAT_KEY = os.getenv("REDIS_CHAT_KEY")
 
 def save_chat_to_redis(chat_history):
     serializable = [
