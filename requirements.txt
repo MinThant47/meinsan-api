@@ -6,5 +6,9 @@ faiss-cpu
 langgraph
 requests
 fastapi
+uvicorn
 upstash-redis
 python-dotenv
+SpeechRecognition
+python-multipart
+streamlit

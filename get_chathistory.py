@@ -1,7 +1,8 @@
 from upstash_redis import Redis
 import json
 
-redis = Redis(url="https://decent-tarpon-27494.upstash.io", token="AWtmAAIjcDFkOTdiOTA1NWUwNWY0NjM0ODdhNzdiODI4ZTIzMjA4NXAxMA")
+#aungkyawkyawsoe
+redis = Redis(url="https://wise-ladybug-34655.upstash.io", token="AYdfAAIjcDFlN2NlYTQwMTY4MmI0NWU4YTlkZjExOGE0YjEyYjcxOXAxMA")
 
 from langchain.schema import HumanMessage, AIMessage
 
