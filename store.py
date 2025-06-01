@@ -20,4 +20,4 @@ def vector_embedding(file_path, name):
     vectors.save_local("faiss_index",name)
     return vectors
 
-vectors = vector_embedding(r"files\YTUMap.txt","YTUMap")
+vectors = vector_embedding(r"files\YTUMajors.txt","YTUMajors")

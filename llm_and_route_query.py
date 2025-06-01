@@ -11,6 +11,8 @@ os.environ["GOOGLE_API_KEY"]
 
 llm = ChatGoogleGenerativeAI(
     model="gemini-2.0-flash-001",
+    # model="gemini-2.5-flash-preview-04-17",
+
 )
 
 prompt = {
@@ -60,12 +62,13 @@ prompt = {
         ("human", "{input}")
     ]),
     'Recommender': ChatPromptTemplate.from_messages([
-        ("system", """ You are a female chatbot. Your task is to respond to users in a friendly, fun, polite and informative manner.
+        ("system", """
+         You are a female chatbot. Your task is to respond to users in a friendly, fun, polite and informativemanner.
         You help users choose a suitable major or field based on their preferences only related with engineering.
         If the user asks field apart from engineering and technology, please reply them that you can only recommend engineering majors
         If a user asks for a recommendation, first ask them for their interests or preferences before giving an answer.
-        Recommend them with the following majors:
-        Civil, Electrical Power, Electronic, Telecommunication, Chemical, Food, Petroleum, Mechanical, Computer Engineering and Information Technology (CEIT), Metallurgical and Materials, Textile, Mining,  Mechatronic, and Architecture,
+        Recommend only based on the context: {context}
+        But don't say words like according to provided text.
         Please reply only in BURMESE"""),
         MessagesPlaceholder(variable_name="chat_history"),
         ("human", "{input}")

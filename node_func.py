@@ -69,12 +69,8 @@ def Navigator(state: State) -> State:
 def Recommender(state: State) -> State:
   print("Routing to Recommender : ")
   question = state["question"]
-  llm_recommender = prompt['Recommender'] | llm
-  raw_answer = llm_recommender.invoke({"input": question, "chat_history": state["chat_history"]})
-
-  response = {"answer": raw_answer.content}
+  response = get_context("YTUMajors", question, prompt['Recommender'], state["chat_history"])
   return {"response": response, "command": "stop"}
-
 
 def CMD(state):
     print("---Command Instruction---")
