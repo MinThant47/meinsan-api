@@ -1,8 +1,11 @@
 from fastapi import FastAPI, File, UploadFile
+from fastapi.responses import FileResponse
 from schema import chatbot
 from langchain.schema import HumanMessage, AIMessage
 from get_chathistory import save_chat_to_redis, load_chat_from_redis
 import speech_recognition as sr
+from tts_func import run_tts_pipeline
+from flac_2_wav import flac_to_wav
 import shutil
 import os
 
@@ -50,7 +53,53 @@ async def upload_audio(file: UploadFile = File(...)):
         "command": result['command']
     }
 
+
+@app.post("/uploadandreturn")
+async def upload_audio(file: UploadFile = File(...)):
+   
+    with open("temp.wav", "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+    
+    try:
+        with sr.AudioFile("temp.wav") as source:
+            audio_data = recognizer.record(source)
+            recognized_text = recognizer.recognize_google(audio_data, language="my-MM")
+    except Exception as e:
+        os.remove("temp.wav")
+        return {
+            "status": "failed",
+            "response_text": f"I am sorry, I don't understand the audio. {e}",
+            "command": "stop"
+        }
+
+    os.remove("temp.wav")
+
+    # Process recognized text
+
+    chat_history = load_chat_from_redis()
+    
+    result = chatbot.invoke({'question': recognized_text, 'chat_history': chat_history})
+
+    if result:
+        chat_history.append(HumanMessage(content=recognized_text))
+        chat_history.append(AIMessage(content=result['response']['answer']))
+        save_chat_to_redis(chat_history)
+
+        run_tts_pipeline(result['response']['answer'])
+        flac_to_wav("response_output.flac","response.wav")
+
+    return {
+        "status": "success",
+        "recognized_text": recognized_text,
+        "response_text": result['response']['answer'],
+        "command": "speak",
+        "audio_url": "https://meinsan-api.onrender.com/get_response_audio"
+    }
+
     # return {"text": recognized_text}
 
+@app.get("/get_response_audio")
+def get_response_audio():
+    return FileResponse("response.wav", media_type="audio/wav", filename="response.wav")
 
 #uvicorn main:app --host 0.0.0.0 --port 8000 --reload
