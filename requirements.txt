@@ -12,3 +12,4 @@ python-dotenv
 SpeechRecognition
 python-multipart
 streamlit
+pydub
