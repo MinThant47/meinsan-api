@@ -5,7 +5,6 @@ from langchain.schema import HumanMessage, AIMessage
 from get_chathistory import save_chat_to_redis, load_chat_from_redis
 import speech_recognition as sr
 from tts_func import run_tts_pipeline
-from flac_2_wav import flac_to_wav
 import shutil
 import os
 
@@ -84,9 +83,8 @@ async def upload_audio(file: UploadFile = File(...)):
         chat_history.append(HumanMessage(content=recognized_text))
         chat_history.append(AIMessage(content=result['response']['answer']))
         save_chat_to_redis(chat_history)
-
+        print("Response finished")
         run_tts_pipeline(result['response']['answer'])
-        flac_to_wav("response_output.flac","response.wav")
 
     return {
         "status": "success",
