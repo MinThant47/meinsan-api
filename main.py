@@ -4,7 +4,8 @@ from schema import chatbot
 from langchain.schema import HumanMessage, AIMessage
 from get_chathistory import save_chat_to_redis, load_chat_from_redis
 import speech_recognition as sr
-from tts_func import run_tts_pipeline
+# from tts_func import run_tts_pipeline
+from aigooglestudio import generate_tts_audio
 import shutil
 import os
 
@@ -84,13 +85,21 @@ async def upload_audio(file: UploadFile = File(...)):
         chat_history.append(AIMessage(content=result['response']['answer']))
         save_chat_to_redis(chat_history)
         print("Response finished")
-        run_tts_pipeline(result['response']['answer'])
+        
+        generate_tts_audio(
+            text = result['response']['answer'],
+            voice_name="Leda",
+            output_filename="response.wav",
+        )
+        
+        # run_tts_pipeline(result['response']['answer'])
+
 
     return {
         "status": "success",
         "recognized_text": recognized_text,
         "response_text": result['response']['answer'],
-        "command": "speak",
+        "command": result['command'],
         "audio_url": "https://meinsan-api.onrender.com/get_response_audio"
     }
 
