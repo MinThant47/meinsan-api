@@ -105,8 +105,21 @@ async def upload_audio(file: UploadFile = File(...)):
 
     # return {"text": recognized_text}
 
+# @app.get("/get_response_audio")
+# def get_response_audio():
+#     return FileResponse("response.wav", media_type="audio/wav", filename="response.wav")
+
 @app.get("/get_response_audio")
 def get_response_audio():
-    return FileResponse("response.wav", media_type="audio/wav", filename="response.wav")
+    return FileResponse(
+        "response.wav", 
+        media_type="audio/wav", 
+        filename="response.wav",
+        headers={
+            "Cache-Control": "no-cache, no-store, must-revalidate",
+            "Pragma": "no-cache",
+            "Expires": "0"
+        }
+    )
 
 #uvicorn main:app --host 0.0.0.0 --port 8000 --reload
