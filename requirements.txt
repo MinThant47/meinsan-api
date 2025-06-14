@@ -14,4 +14,3 @@ python-multipart
 streamlit
 pydub
 google-genai
-openai-whisper
