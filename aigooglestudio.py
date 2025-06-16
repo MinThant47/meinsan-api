@@ -48,7 +48,7 @@ load_dotenv()
 GEMINI_API_KEY = os.getenv("GOOGLE_API_KEY")
 
 # Save PCM audio to a .wav file
-def save_wave_file(filename, pcm, channels=1, rate=8000, sample_width=2):
+def save_wave_file(filename, pcm, channels=1, rate=24000, sample_width=2):
     with wave.open(filename, "wb") as wf:
         wf.setnchannels(channels)
         wf.setsampwidth(sample_width)
