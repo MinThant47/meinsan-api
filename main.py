@@ -115,9 +115,9 @@ async def upload_audio(file: UploadFile = File(...)):
 @app.get("/get_response_audio")
 def get_response_audio():
     return FileResponse(
-        "response.wav", 
-        media_type="audio/wav", 
-        filename="response.wav",
+        "output.wav.mp3", 
+        media_type="audio/mp3", 
+        filename="output.wav.mp3",
         headers={
             "Cache-Control": "no-cache, no-store, must-revalidate",
             "Pragma": "no-cache",
