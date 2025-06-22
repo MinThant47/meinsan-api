@@ -41,10 +41,12 @@ def generate_tts_audio(
 
     # Extract PCM data and save
     pcm_data = response.candidates[0].content.parts[0].inline_data.data
-    save_wave_file(output_filename + ".wav", pcm_data)
+    # save_wave_file(output_filename + ".wav", pcm_data)
+    save_wave_file(f"{output_filename}.wav", pcm_data)
 
     audio = AudioSegment.from_wav(output_filename + ".wav")
 
-    audio.export(f"{output_filename+".mp3"}", format="mp3", bitrate="32k")
-    
+    # audio.export(f"{output_filename+".mp3"}", format="mp3", bitrate="32k")
+    audio.export(f"{output_filename}.mp3", format="mp3", bitrate="32k")
+
     print(f"Audio saved to: {output_filename}")
