@@ -7,7 +7,6 @@ from typing import Literal, List
 from langchain_google_genai import ChatGoogleGenerativeAI
 import os
 from dotenv import load_dotenv
-import re
 
 load_dotenv()
 os.environ["GOOGLE_API_KEY"]
@@ -16,7 +15,6 @@ llm = ChatGoogleGenerativeAI(
     model="gemini-2.5-flash-preview-04-17",
 )
 
-# Your existing prompt dictionary remains the same
 prompt = {
     'FAQ': ChatPromptTemplate.from_messages([
         ("system", """You are the female chatbot for Yangon Technological University (YTU). Your name is မေစံ. You are created by 5th year EC students.
@@ -86,6 +84,8 @@ class QuerySplit(BaseModel):
         description="List of individual questions extracted from the user input"
     )
 
+# Change Here
+
 class RouteQuery(BaseModel):
     """Route a user query to the most relevant datasource."""
 
@@ -134,6 +134,7 @@ split_prompt = ChatPromptTemplate.from_messages([
 question_splitter = split_prompt | structured_llm_splitter
 
 # Router for individual questions
+# Change Here
 structured_llm_router = llm.with_structured_output(RouteQuery)
 
 system = """You are an expert at routing a user question to FAQ or Recommender or EC_info or McE_info or CMD or Navigator or not_found.
