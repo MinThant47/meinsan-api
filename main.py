@@ -92,7 +92,7 @@ async def upload_audio(file: UploadFile = File(...)):
         generate_tts_audio(
             text = result['response']['answer'],
             voice_name="Leda",
-            output_filename="response.wav",
+            output_filename="response",
         )
         
         # run_tts_pipeline(result['response']['answer'])
@@ -115,9 +115,9 @@ async def upload_audio(file: UploadFile = File(...)):
 @app.get("/get_response_audio")
 def get_response_audio():
     return FileResponse(
-        "output.wav.mp3", 
+        "response.mp3", 
         media_type="audio/mp3", 
-        filename="output.wav.mp3",
+        filename="response.mp3",
         headers={
             "Cache-Control": "no-cache, no-store, must-revalidate",
             "Pragma": "no-cache",
