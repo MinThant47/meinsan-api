@@ -1,52 +1,24 @@
-Q: What is Yangon Technological University (YTU)?
-Ans: Yangon Technological University is the premier engineering university in Myanmar, offering bachelor's, master's, and doctoral degree programs in various engineering disciplines.
+1. YTU ဆိုတာဘာလဲ၊ ဘယ်မှာတည်ရှိလဲ?
+YTU (ရန်ကုန်နည်းပညာတက္ကသိုလ်) သည် မြန်မာနိုင်ငံ၏ ထိပ်တန်းနည်းပညာတက္ကသိုလ်ဖြစ်ပြီး၊ ရန်ကုန်မြို့၊ အင်းစိန်မြို့နယ်၊ Gyogone ပတ်လမ်းအနီးတွင် တည်ရှိသည်။
 
-Q: Where is YTU located?
-Ans: YTU is located in Insein, Yangon, Myanmar, with coordinates 16°52′32.94″N 96°7′1.82″E.
+2. YTU ဝင်ခွင့်ရဖို့ ဘယ်လိုဖြစ်ရမလဲ?
+နိုင်ငံတော် တက္ကသိုလ်ဝင်တန်းစာမေးပွဲတွင် အဆင်ပြေစွာအောင်မြင်ပြီး၊ သက်ဆိုင်ရာ Stream (Science/Maths) မှာ မြင့်မားသောအမှတ်နှင့် ရွေးချယ်ခံရပါမယ်။
 
-Q: When was YTU established?
-Ans: YTU was established in 1924 as the Department of Engineering under Rangoon University.
+3. YTU မှာ ဘွဲ့ကြိုသင်တန်း (B.E.) ဘယ်နှစ်နှစ်ကြာသလဲ?
+Bachelor of Engineering သင်တန်းသည် ၆ နှစ် ကြာသည်။ Foundation Year တစ်နှစ်နှင့် Major သင်တန်း (၅) နှစ် ပါဝင်သည်။
 
-Programs and Departments
-Q: What academic programs does YTU offer?
-Ans: YTU offers bachelor's, master's, and doctoral degrees in engineering disciplines, including Civil, Mechanical, Chemical, Electrical, and more.
+4. YTU မှာ Master / PhD သင်ကြားပေးပါသလား?
+ဟုတ်ပါတယ်။ Master of Engineering (M.E.) နှစ်နှစ်ကြာပြီး၊ Ph.D. သည် သုံးနှစ်မှ ငါးနှစ်အထိ ကြာနိုင်သည်။
 
-Q: What are the academic departments at YTU?
-Ans: There are 18 departments, including Civil Engineering, Electrical Power Engineering, Mechatronic Engineering, Biotechnology, and Architecture, among others.
+5. YTU မှာ Hostel ရှိလား?
+ရှိပါတယ်။ Boys' Hostel နှင့် Girls' Hostel သီးခြားရှိပြီး၊ အိမ်အကူမဲ့သော ကျောင်းသားများကို ဦးစားပေးအပ်ပါသည်။ လျှောက်လွှာဖြင့် လျှောက်ရပါသည်။
 
-Q: Are postgraduate programs available at YTU?
-Ans: Yes, YTU offers postgraduate diploma, master's, and doctoral programs in various applied sciences and engineering fields.
+6. စာမေးပွဲစနစ်က ဘယ်လိုလဲ?
+Semester system (တစ်နှစ် ၂ ခုပြုလုပ်)
+Mid-term + Final exam
+Practical (Lab) marks ပါဝင်
+Fail ဖြစ်ပါက Supplementary Exam ဖြေခွင့်ရှိ
 
-Admissions
-Q: How are students admitted to YTU's undergraduate programs?
-Ans: Students are admitted based on their scores in the annual university entrance examinations.
+7. YTU မှာ Lab စက်ကိရိယာတွေက update ဖြစ်လား?
+အချို့သောဌာနများတွင် အသစ်ပြုပြင်ထားသော Lab tools ရှိပြီး၊ ကျောင်းသားများအတွက် လက်တွေ့သင်ကြားမှုကို မြှင့်တင်နေသည်။ ဒါပေမယ့် တချို့ဌာနတွင်တော့ အဟောင်းသုံးနေဆဲဖြစ်သည်။
 
-Q: What is the duration of YTU's programs?
-Ans:
-
-Bachelor's programs: 6 years for B.E. and B.Arch.
-Master's programs: 2 years for M.E. and M.Arch.
-Ph.D. programs: 3–5 years.
-Campus Facilities
-Q: How many campuses does YTU have?
-Ans: YTU has two campuses: the main campus in Gyogone and a smaller campus in Hlaingthaya Township.
-
-Q: What facilities are available on YTU's main campus?
-Ans: The main campus includes interconnected buildings, a library, a recreational center, a football pitch, a canteen with restaurants, a car park, and faculty residences.
-
-Affiliations and Collaborations
-Q: Is YTU affiliated with international organizations?
-Ans: Yes, YTU is a member of the Southeast Asia Engineering Education Development Network (AUN/SEED-Net) and the Greater Mekong Sub-region Academic and Research Network (GMSARN).
-
-Q: Does YTU have academic partnerships with other institutions?
-Ans: Yes, YTU collaborates with institutions like the University of Karlsruhe (Germany), Shibaura Institute of Technology (Japan), and the Asian Institute of Technology (Thailand).
-
-Historical and Political Significance
-Q: What significant historical events are associated with YTU?
-Ans: YTU was central to the 1988 pro-democracy uprising in Myanmar, following the deaths of students like Ko Phone Maw, which led to widespread protests against the government.
-
-Q: What was YTU formerly known as?
-Ans: YTU was previously known as Rangoon Institute of Technology (RIT), Rangoon University’s Department of Engineering, and Burma Institute of Technology (BIT).
-
-Q: Who is the nun?
-Ans: It's our so called pro-rector

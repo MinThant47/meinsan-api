@@ -12,7 +12,8 @@ load_dotenv()
 os.environ["GOOGLE_API_KEY"]
 
 llm = ChatGoogleGenerativeAI(
-    model="gemini-2.5-flash-preview-04-17",
+    # model="gemini-2.5-flash-preview-04-17",
+    model="gemini-2.0-flash",
 )
 
 prompt = {
@@ -35,9 +36,18 @@ prompt = {
         MessagesPlaceholder(variable_name="chat_history"),
         ("human", "{input}")
     ]),
-    'McE': ChatPromptTemplate.from_messages([
+     'Hostel': ChatPromptTemplate.from_messages([
         ("system", """ Your task is to respond to users in a friendly, fun, polite and informative manner.
-        You have to provide information about Mechatronics engineering department related questions such as career and fields.
+        You have to provide information about hostel related questions such as how to apply for the hostel, when is the close time for the hostel.
+        Please only provide responses based on the context: {context}
+        But don't say words like according to provided text.
+        Please reply only in BURMESE"""),
+        MessagesPlaceholder(variable_name="chat_history"),
+        ("human", "{input}")
+    ]),
+     'Exam': ChatPromptTemplate.from_messages([
+        ("system", """ Your task is to respond to users in a friendly, fun, polite and informative manner.
+        You have to provide information about exam related questions such as how many exams can i take for the whole student life, when do I know the exam room and so on.
         Please only provide responses based on the context: {context}
         But don't say words like according to provided text.
         Please reply only in BURMESE"""),
@@ -89,7 +99,7 @@ class QuerySplit(BaseModel):
 class RouteQuery(BaseModel):
     """Route a user query to the most relevant datasource."""
 
-    datasource: Literal["FAQ", "EC_info", "McE_info", "CMD", "Recommender", "Navigator", "not_found"] = Field(
+    datasource: Literal["FAQ", "EC_info", "Hostel", "Exam", "CMD", "Recommender", "Navigator", "not_found"] = Field(
         ...,
         description="""You are given a user question, help me choose a route to
         FAQ or EC_info or McE_info or Recommender or Navigator or CMD or not_found""",
@@ -98,7 +108,7 @@ class RouteQuery(BaseModel):
 class CommandQuery(BaseModel):
     """Classify user commands to relevant datasource."""
 
-    datasource: Literal["forward", "backward", "spin", "smile", "sad"] = Field(
+    datasource: Literal["forward", "backward", "spin", "smile", "sad", "angry"] = Field(
         ...,
         description="""You are given a user question, help me choose classification
         1. forward
@@ -106,6 +116,7 @@ class CommandQuery(BaseModel):
         3. spin
         3. smile
         4. sad
+        5. angry
         """
     )
 
@@ -137,13 +148,14 @@ question_splitter = split_prompt | structured_llm_splitter
 # Change Here
 structured_llm_router = llm.with_structured_output(RouteQuery)
 
-system = """You are an expert at routing a user question to FAQ or Recommender or EC_info or McE_info or CMD or Navigator or not_found.
+system = """You are an expert at routing a user question to FAQ or Recommender or EC_info or Hostel or Exam or CMD or Navigator or not_found.
 The FAQ contains about introdution, small talks, compliments and general university questions such as about the majors, who is the pro rector and else.
 The Recommender helps users choose suitable academic fields or majors based on their questions. For example, questions like: 'ဘယ် field ကို ရွေးရမလဲ။ ဘယ် major နဲ့ ပိုပြီး သင့်တော်မလဲ။'
 The Navigator helps users find their way around the campus by answering location-based questions and providing clear directions to departments, buildings, and facilities.
 The EC_info contains in depth about electronic engineering in YTU, topics such as department information, fields and career of electronics engineering.
-The McE_info provides detailed information about Mechatronics Engineering at YTU, including topics such as department information, areas of specialization and potential career paths in the field.
-The CMD is routed when user asked for instructions like "Move Forward, Stay Backward, Come Here, Spin around, make a smiley face, make a sad face and so on".
+The Hostel includes details about how to apply for the hostel, what are the hostel rules.
+The Exam helps users find exam related information such as where are the exam rooms, what are the exam rules.
+The CMD is routed when user asked for instructions like "Move Forward, Stay Backward, Come Here, Spin around, make a smiley face, make a sad face, make an angry face and so on".
 If you can't find anything related to the above topics, then reply not_found
 """
 
@@ -167,6 +179,7 @@ returns backward if user ask for moving backward (for eg. move backward, stay ba
 returns spin if user ask to spin around. (for eg. spin around, make a round)
 returns smile if user ask to make a smiley face or make a smile.
 returns sad if user make you a sad face.
+returns angry if user make you an angry face.
 """
 
 command_prompt = ChatPromptTemplate.from_messages([

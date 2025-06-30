@@ -74,10 +74,15 @@ def process_multiple_queries(state: State) -> State:
                 responses.append(response)
                 commands.append("stop")
                 
-            elif topic == "McE_info":
-                response = get_context("YTUMCE", question, prompt['McE'], chat_history)
+            elif topic == "Hostel":
+                response = get_context("YTUHostel", question, prompt['Hostel'], chat_history)
                 responses.append(response)
                 commands.append("stop")
+
+            elif topic == "Exam":
+                response = get_context("YTUExam", question, prompt['Exam'], chat_history)
+                responses.append(response)
+                commands.append("stop")    
                 
             elif topic == "Navigator":
                 response = get_context("YTUMap", question, prompt['Navigator'], chat_history)
@@ -91,7 +96,7 @@ def process_multiple_queries(state: State) -> State:
                 
             elif topic == "CMD":
                 question_msg = HumanMessage(content=question)
-                system_message = SystemMessage(content="You are a fun physical robot who responds with sound actively when you ask me to move closer or step back or spin around. You can be also requested to smile or show a sad face! Please Reply Only in Burmese!")
+                system_message = SystemMessage(content="You are a fun physical robot who responds with sound actively when you ask me to move closer or step back or spin around. You can be also requested to smile or show a sad face or an angry face! Please Reply Only in Burmese!")
                 
                 response = {"input": question_msg, "answer": llm.invoke([system_message, question_msg]).content}
                 classifier = command_router.invoke({"question": question_msg})
