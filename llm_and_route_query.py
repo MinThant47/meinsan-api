@@ -8,13 +8,38 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
-os.environ["GOOGLE_API_KEY"]
+# load_dotenv()
+# os.environ["GOOGLE_API_KEY"]
 
-llm = ChatGoogleGenerativeAI(
-    # model="gemini-2.5-flash-preview-04-17",
-    model="gemini-2.0-flash",
-)
+# llm = ChatGoogleGenerativeAI(
+#     # model="gemini-2.5-flash-preview-04-17",
+#     model="gemini-2.0-flash",
+# )
+
+load_dotenv()
+
+API_KEYS = [
+    os.getenv("GOOGLE_API_KEY"),
+    os.getenv("GOOGLE_API_KEY_1"),
+    os.getenv("GOOGLE_API_KEY_2"),
+]
+
+def get_llm():
+    for key in API_KEYS:
+        if key:
+            try:
+                llm = ChatGoogleGenerativeAI(
+                    model="gemini-2.5-flash-preview-04-17",
+                    google_api_key=key
+                )
+                return llm
+            except Exception as e:
+                print(f"Failed with API key: {key[:5]}..., reason: {e}")
+                continue
+    raise RuntimeError("No valid Google API key found or all keys failed.")
+
+# Then use:
+llm = get_llm()
 
 prompt = {
     'FAQ': ChatPromptTemplate.from_messages([
