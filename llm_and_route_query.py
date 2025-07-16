@@ -29,7 +29,7 @@ def get_llm():
         if key:
             try:
                 llm = ChatGoogleGenerativeAI(
-                    model="gemini-2.5-flash-preview-04-17",
+                    model="gemini-2.5-flash",
                     google_api_key=key
                 )
                 return llm
