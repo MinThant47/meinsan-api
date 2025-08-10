@@ -13,7 +13,7 @@ def transcribe_audio(filename):
   client = genai.Client(api_key=AUDIO_GOOGLE_API_KEY)
 
   response = client.models.generate_content(
-    model='gemini-2.5-flash-preview-05-20',
+    model='gemini-2.5-flash',
     contents=[
       """Transcribe this audio clip. It may contain both Burmese and English. Output only the plain transcription without any additional explanation or formatting.""",
       types.Part.from_bytes(
