@@ -1,3 +1,7 @@
+import asyncio
+loop = asyncio.new_event_loop()
+asyncio.set_event_loop(loop)
+
 import streamlit as st
 from langchain.schema import HumanMessage, AIMessage
 from schema import chatbot
@@ -41,4 +45,3 @@ if final_text:
 
 
         save_chat_to_redis(st.session_state.chat_history)
-

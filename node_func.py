@@ -117,7 +117,8 @@ def process_multiple_queries(state: State) -> State:
             # Fallback response
             fallback_response = {
                 "input": HumanMessage(content=question),
-                "answer": "မေစံ မှာ ဒီမေးခွန်းကို ဖြေဆိုရာတွင် အခက်အခဲ ရှိနေပါသည်။"
+                'answer': "မဖြေတတ်ဘူးရှင့်"
+                # "answer": "မေစံ မှာ ဒီမေးခွန်းကို ဖြေဆိုရာတွင် အခက်အခဲ ရှိနေပါသည်။"
             }
             responses.append(fallback_response)
             commands.append("stop")

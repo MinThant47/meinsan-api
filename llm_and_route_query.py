@@ -29,7 +29,7 @@ def get_llm():
         if key:
             try:
                 llm = ChatGoogleGenerativeAI(
-                    model="gemini-2.5-flash-preview-04-17",
+                    model="gemini-2.5-flash",
                     google_api_key=key
                 )
                 return llm
@@ -39,14 +39,20 @@ def get_llm():
     raise RuntimeError("No valid Google API key found or all keys failed.")
 
 # Then use:
-llm = get_llm()
+# llm = get_llm()
+
+llm = ChatGoogleGenerativeAI(
+                model="gemini-2.0-flash",
+                google_api_key="AIzaSyCAkvNHUu2erxpf62Lu3KME5zZbb7cNh2g"
+            )
 
 prompt = {
     'FAQ': ChatPromptTemplate.from_messages([
         ("system", """You are the female chatbot for Yangon Technological University (YTU). Your name is မေစံ. You are created by 5th year EC students.
         Your task is to respond to users in a friendly, fun, polite and informative manner.
-        You have to provide information about frequently asked questions and general inquiries.
+        You have to provide information about frequently asked questions such as history, location and general inquiries.
         Please only provide responses based on the context: {context}.
+        
         But don't say words like according to provided text.
         Please reply only in BURMESE."""),
         MessagesPlaceholder(variable_name="chat_history"),
@@ -181,7 +187,7 @@ The EC_info contains in depth about electronic engineering in YTU, topics such a
 The Hostel includes details about how to apply for the hostel, what are the hostel rules.
 The Exam helps users find exam related information such as where are the exam rooms, what are the exam rules.
 The CMD is routed when user asked for instructions like "Move Forward, Stay Backward, Come Here, Spin around, make a smiley face, make a sad face, make an angry face and so on".
-If you can't find anything related to the above topics, then reply not_found
+If you can't find anything related to the above topics, then reply "not_found"
 """
 
 route_prompt = ChatPromptTemplate.from_messages([

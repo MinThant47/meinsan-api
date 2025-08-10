@@ -103,7 +103,7 @@ def try_generate_tts(api_key, text, voice_name, output_filename):
         return False
 
 # Main function that tries multiple API keys
-def generate_tts_audio(text, voice_name='Zephyr', output_filename='output'):
+def generate_tts_audio(text, voice_name='Leda', output_filename='output'):
     for key in API_KEYS:
         if key and try_generate_tts(key, text, voice_name, output_filename):
             return  # Success
