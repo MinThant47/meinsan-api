@@ -39,12 +39,7 @@ def get_llm():
     raise RuntimeError("No valid Google API key found or all keys failed.")
 
 # Then use:
-# llm = get_llm()
-
-llm = ChatGoogleGenerativeAI(
-                model="gemini-2.0-flash",
-                google_api_key="AIzaSyCAkvNHUu2erxpf62Lu3KME5zZbb7cNh2g"
-            )
+llm = get_llm()
 
 prompt = {
     'FAQ': ChatPromptTemplate.from_messages([
