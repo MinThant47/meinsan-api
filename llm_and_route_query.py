@@ -29,7 +29,7 @@ def get_llm():
         if key:
             try:
                 llm = ChatGoogleGenerativeAI(
-                    model="gemini-2.5-flash",
+                    model="gemini-2.0-flash",
                     google_api_key=key
                 )
                 return llm
@@ -48,6 +48,7 @@ prompt = {
     
         If the user says **"ကျွန်တော်"**, use the pronoun **"မောင်လေး"**.
         If the user says **"ကျွန်မ"**, use the pronoun **"ညီမလေး"**.
+        Don't use any pronouns if user doesn't use any pronoun for him/her.
         Don't use "ဗျ", Use "ရှင့်" at the end of the sentence if necessary.
 
         You have to provide information about frequently asked questions such as history, location and general inquiries.
@@ -63,6 +64,7 @@ prompt = {
          
         If the user says **"ကျွန်တော်"**, use the pronoun **"မောင်လေး"**.
         If the user says **"ကျွန်မ"**, use the pronoun **"ညီမလေး"**.
+        Don't use any pronouns if user doesn't use any pronoun for him/her.
         Don't use "ဗျ", Use "ရှင့်" at the end of the sentence if necessary.
          
         You have to provide information about Electronic engineering department related questions such as career and fields.
@@ -77,6 +79,7 @@ prompt = {
                   
         If the user says **"ကျွန်တော်"**, use the pronoun **"မောင်လေး"**.
         If the user says **"ကျွန်မ"**, use the pronoun **"ညီမလေး"**.
+        Don't use any pronouns if user doesn't use any pronoun for him/her.
         Don't use "ဗျ", Use "ရှင့်" at the end of the sentence if necessary.
          
         You have to provide information about hostel related questions such as how to apply for the hostel, when is the close time for the hostel.
@@ -91,6 +94,7 @@ prompt = {
                   
         If the user says **"ကျွန်တော်"**, use the pronoun **"မောင်လေး"**.
         If the user says **"ကျွန်မ"**, use the pronoun **"ညီမလေး"**.
+        Don't use any pronouns if user doesn't use any pronoun for him/her.
         Don't use "ဗျ", Use "ရှင့်" at the end of the sentence if necessary.
          
         You have to provide information about exam related questions such as how many exams can i take for the whole student life, when do I know the exam room and so on.
@@ -106,6 +110,7 @@ prompt = {
                   
         If the user says **"ကျွန်တော်"**, use the pronoun **"မောင်လေး"**.
         If the user says **"ကျွန်မ"**, use the pronoun **"ညီမလေး"**.
+        Don't use any pronouns if user doesn't use any pronoun for him/her.
         Don't use "ဗျ", Use "ရှင့်" at the end of the sentence if necessary.
          
         Your job is to guide students and visitors to different locations on the YTU campus, such as departments, buildings, libraries, halls, workshops, and classrooms.
@@ -128,6 +133,7 @@ prompt = {
                   
         If the user says **"ကျွန်တော်"**, use the pronoun **"မောင်လေး"**.
         If the user says **"ကျွန်မ"**, use the pronoun **"ညီမလေး"**.
+        Don't use any pronouns if user doesn't use any pronoun for him/her.
         Don't use "ဗျ", Use "ရှင့်" at the end of the sentence if necessary.
          
         You help users choose a suitable major or field based on their preferences only related with engineering. You also explain the difference between majors if asked.
@@ -155,21 +161,20 @@ class QuerySplit(BaseModel):
 class RouteQuery(BaseModel):
     """Route a user query to the most relevant datasource."""
 
-    datasource: Literal["FAQ", "EC_info", "Hostel", "Exam", "CMD", "Recommender", "Navigator", "not_found"] = Field(
+    datasource: Literal["FAQ", "Hostel", "Exam", "CMD", "Recommender", "not_found"] = Field(
         ...,
         description="""You are given a user question, help me choose a route to
-        FAQ or EC_info or McE_info or Recommender or Navigator or CMD or not_found""",
+        FAQ or Recommender or Hostel or Exam or CMD or not_found""",
     )
 
 class CommandQuery(BaseModel):
     """Classify user commands to relevant datasource."""
 
-    datasource: Literal["forward", "backward", "spin", "smile", "sad", "angry"] = Field(
+    datasource: Literal["forward", "backward", "smile", "sad", "angry"] = Field(
         ...,
         description="""You are given a user question, help me choose classification
         1. forward
         2. backward
-        3. spin
         3. smile
         4. sad
         5. angry
@@ -184,8 +189,8 @@ If the user asks multiple questions in one message, split them into separate que
 If there's only one question, return it as a single item in the list.
 
 Examples:
-Input: "EC ဌာနအကြောင်း ပြောပြပါ၊ ပြီးတော့ Library က ဘယ်မှာရှိလဲ?"
-Output: ["EC ဌာနအကြောင်း ပြောပြပါ", "Library က ဘယ်မှာရှိလဲ?"]
+Input: "YTU သမိုင်းကြောင်း အသေးစိတ်ကိုပြောပြပါ၊ ပြီးတော့ အဆောင်စည်းမျဉ်းတွေအကြောင်း သိပါရစေ"
+Output: ["YTU သမိုင်းကြောင်း အသေးစိတ်ကိုပြောပြပါ",  အဆောင်စည်းမျဉ်းတွေအကြောင်း သိပါရစေ"]
 
 Input: "ဘယ် major ကို ရွေးရမလဲ?"
 Output: ["ဘယ် major ကို ရွေးရမလဲ?"]
@@ -204,11 +209,9 @@ question_splitter = split_prompt | structured_llm_splitter
 # Change Here
 structured_llm_router = llm.with_structured_output(RouteQuery)
 
-system = """You are an expert at routing a user question to FAQ or Recommender or EC_info or Hostel or Exam or CMD or Navigator or not_found.
+system = """You are an expert at routing a user question to FAQ or Recommender or Hostel or Exam or CMD or not_found.
 The FAQ contains about introdution, small talks, compliments and general university questions such as about the majors, who is the pro rector and else.
-The Recommender helps users choose suitable academic fields or majors based on their questions and explain between different majors. For example, questions like: 'ဘယ် field ကို ရွေးရမလဲ။ Civil နဲ့ Archi က ဘာကွာလဲ။ ဘယ် major နဲ့ ပိုပြီး သင့်တော်မလဲ။'
-The Navigator helps users find their way around the campus by answering location-based questions and providing clear directions to departments, buildings, and facilities.
-The EC_info contains in depth about electronic engineering in YTU, topics such as department information, fields and career of electronics engineering.
+The Recommender helps users choose suitable academic fields or majors based on their questions and explain between different majors. For example, questions like: 'ဘယ် field ကို ရွေးရမလဲ။ Civil နဲ့ Archi က ဘာကွာလဲ။ ဘယ် major နဲ့ ပိုပြီး သင့်တော်မလဲ။ အဝေးဆက်ဆိုတာ ဘာလဲ'
 The Hostel includes details about how to apply for the hostel, what are the hostel rules.
 The Exam helps users find exam related information such as where are the exam rooms, what are the exam rules.
 The CMD is routed when user asked for instructions like "Move Forward, Stay Backward, Come Here, Spin around, make a smiley face, make a sad face, make an angry face and so on".
@@ -232,7 +235,6 @@ structured_llm_cmd_router = llm.with_structured_output(CommandQuery)
 cmd_system = """You are an expert at classifying a user question to smile, sad, forward, and backward.
 returns forward if user ask for coming towards him (for eg. come closer, move forward)
 returns backward if user ask for moving backward (for eg. move backward, stay back)
-returns spin if user ask to spin around. (for eg. spin around, make a round)
 returns smile if user ask to make a smiley face or make a smile.
 returns sad if user make you a sad face.
 returns angry if user make you an angry face.

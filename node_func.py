@@ -69,10 +69,10 @@ def process_multiple_queries(state: State) -> State:
                 responses.append(response)
                 commands.append("stop")
                 
-            elif topic == "EC_info":
-                response = get_context("YTUEC", question, prompt['EC'], chat_history)
-                responses.append(response)
-                commands.append("stop")
+            # elif topic == "EC_info":
+            #     response = get_context("YTUEC", question, prompt['EC'], chat_history)
+            #     responses.append(response)
+            #     commands.append("stop")
                 
             elif topic == "Hostel":
                 response = get_context("YTUHostel", question, prompt['Hostel'], chat_history)
@@ -84,10 +84,10 @@ def process_multiple_queries(state: State) -> State:
                 responses.append(response)
                 commands.append("stop")    
                 
-            elif topic == "Navigator":
-                response = get_context("YTUMap", question, prompt['Navigator'], chat_history)
-                responses.append(response)
-                commands.append("stop")
+            # elif topic == "Navigator":
+            #     response = get_context("YTUMap", question, prompt['Navigator'], chat_history)
+            #     responses.append(response)
+            #     commands.append("stop")
                 
             elif topic == "Recommender":
                 response = get_context("YTUMajors", question, prompt['Recommender'], chat_history)
@@ -106,7 +106,7 @@ def process_multiple_queries(state: State) -> State:
                 
             else:  # not_found
                 question_msg = HumanMessage(content=question + "The answer to the question isn't available in the document.")
-                system_message = SystemMessage(content="You provides polite and concise reponse when there is no relevant information in the given documents in burmese.")
+                system_message = SystemMessage(content="တောင်းပန်ပါတယ်ရှင့်။ မေစံက YTU နဲ့ ပတ်သတ်တဲ့ အချက်အလက်တွေကိုပဲ ဖြေပေးနိုင်ပါတယ်ရှင့်")
                 
                 response = {"input": question_msg, "answer": llm.invoke([system_message, question_msg]).content}
                 responses.append(response)
@@ -117,8 +117,7 @@ def process_multiple_queries(state: State) -> State:
             # Fallback response
             fallback_response = {
                 "input": HumanMessage(content=question),
-                'answer': "မဖြေတတ်ဘူးရှင့်"
-                # "answer": "မေစံ မှာ ဒီမေးခွန်းကို ဖြေဆိုရာတွင် အခက်အခဲ ရှိနေပါသည်။"
+                'answer': "ဒီမေးခွန်းနဲ့ပတ်သက်ပြီး အသေးစိတ် အချက်အလက် မသေချာသေးတာကြောင့် ကျောင်းသားရေးရာ သို့မဟုတ် သင်တန်းရေးရာကို ဆက်သွယ်ပြီး မေးမြန်းနိုင်ပါတယ်။"
             }
             responses.append(fallback_response)
             commands.append("stop")
