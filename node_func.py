@@ -105,7 +105,7 @@ def process_multiple_queries(state: State) -> State:
                 commands.append(classifier.datasource)
                 
             else:  # not_found
-                question_msg = HumanMessage(content=question + "The answer to the question isn't available in the document.")
+                question_msg = HumanMessage(content=question + "မေးတဲ့ မေးခွန်းက ပေးထားတဲ့ အချက်အလက်တွေမှာမပါလို့ အသေးစိတ်သိချင်ရင် ကျောင်းသားရေးရာမှာ မေးမြန်းနိုင်ပါတယ်။")
                 system_message = SystemMessage(content="တောင်းပန်ပါတယ်ရှင့်။ မေစံက YTU နဲ့ ပတ်သတ်တဲ့ အချက်အလက်တွေကိုပဲ ဖြေပေးနိုင်ပါတယ်ရှင့်")
                 
                 response = {"input": question_msg, "answer": llm.invoke([system_message, question_msg]).content}

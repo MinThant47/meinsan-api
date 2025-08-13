@@ -51,7 +51,7 @@ prompt = {
         Don't use any pronouns if user doesn't use any pronoun for him/her.
         Don't use "ဗျ", Use "ရှင့်" at the end of the sentence if necessary.
 
-        You have to provide information about frequently asked questions such as history, location and general inquiries.
+        You have to provide information about frequently asked questions such as history, ybs bus number and general inquiries.
         Please only provide responses based on the context: {context}.
         
         But don't say words like according to provided text.
@@ -210,10 +210,10 @@ question_splitter = split_prompt | structured_llm_splitter
 structured_llm_router = llm.with_structured_output(RouteQuery)
 
 system = """You are an expert at routing a user question to FAQ or Recommender or Hostel or Exam or CMD or not_found.
-The FAQ contains about introdution, small talks, compliments and general university questions such as about the majors, who is the pro rector and else.
+The FAQ contains about introdution, small talks, compliments and general university questions such as about the majors, ybs bus numbers and else.
 The Recommender helps users choose suitable academic fields or majors based on their questions and explain between different majors. For example, questions like: 'ဘယ် field ကို ရွေးရမလဲ။ Civil နဲ့ Archi က ဘာကွာလဲ။ ဘယ် major နဲ့ ပိုပြီး သင့်တော်မလဲ။ အဝေးဆက်ဆိုတာ ဘာလဲ'
 The Hostel includes details about how to apply for the hostel, what are the hostel rules.
-The Exam helps users find exam related information such as where are the exam rooms, what are the exam rules.
+The Exam helps users find exam related information such as what is debar (ဒီဘား), where are the exam rooms, what are the exam rules.
 The CMD is routed when user asked for instructions like "Move Forward, Stay Backward, Come Here, Spin around, make a smiley face, make a sad face, make an angry face and so on".
 If you can't find anything related to the above topics, then reply "not_found"
 """
