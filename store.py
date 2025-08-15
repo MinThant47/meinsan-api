@@ -13,7 +13,7 @@ def vector_embedding(file_path, name):
     embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
     loader = TextLoader(file_path, encoding='utf-8')
     docs=loader.load()
-    text_splitter=RecursiveCharacterTextSplitter(chunk_size=1000,chunk_overlap=200) ## Chunk Creation
+    text_splitter=RecursiveCharacterTextSplitter(chunk_size=2000,chunk_overlap=200) ## Chunk Creation
     final_documents=text_splitter.split_documents(docs[:20]) #splitting
     vectors=FAISS.from_documents(final_documents,embeddings) #vector google embeddings
     index_path = "faiss_index" + name

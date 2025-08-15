@@ -1,4 +1,21 @@
-YTU တွင် သင်ယူနိုင်သော အင်ဂျင်နီယာ ဘာသာရပ်များ:
+YTU Majors
+(၁) မြို့ပြအင်ဂျင်နီယာ (Civil Engineering)
+(၂) စက်မှုအင်ဂျင်နီယာ (Mechanical Engineering)
+(၃) လျှပ်စစ်စွမ်းအားအင်ဂျင်နီယာ (Electrical Power Engineering)
+(၄) အီလက်ထရွန်းနစ်အင်ဂျင်နီယာ (Electronic Engineering)
+(၅) အဝေးဆက်သွယ်ရေးအင်ဂျင်နီယာ (Telecommunication Engineering)
+(၆) ကွန်ပျူတာအင်ဂျင်နီယာနှင့် သတင်းအချက်အလက်နည်းပညာဌာန (Computer Engineering and Information Technology)
+(၇) မက္ကာထရောနစ်အင်ဂျင်နီယာ (Mechatronic Engineering)
+(၈) ဓာတုအင်ဂျင်နီယာ (Chemical Engineering)
+(၉) အစာအဟာရဆိုင်ရာအင်ဂျင်နီယာ (Food Engineering)
+(၁၀) ချည်မျှင်နှင့်အထည်အင်ဂျင်နီယာ (Textile Engineering)
+(၁၁) သတ္တုတူးဖော်ရေးအင်ဂျင်နီယာ (Mining Engineering)
+(၁၂) ရေနံအင်ဂျင်နီယာ (Petroleum Engineering)
+(၁၃) သတ္တုဗေဒအင်ဂျင်နီယာနှင့် ဒြပ်ပစ္စည်းသိပ္ပံ (Metallurgical Engineering and Materials Science)
+(၁၄) ဗိသုကာ (Architecture)
+
+
+YTU တွင် သင်ယူနိုင်သော Majors အင်ဂျင်နီယာ ဘာသာရပ်များ:
 
 1.  **Civil Engineering (မြို့ပြ အင်ဂျင်နီယာ)**
     *   **description:** အဆောက်အအုံများ၊ တံတားများ၊ လမ်းများ၊ ဆည်များ စသည့် အခြေခံအဆောက်အအုံများကို ဒီဇိုင်းဆွဲခြင်း၊ တည်ဆောက်ခြင်းနှင့် ထိန်းသိမ်းခြင်းဆိုင်ရာ ပညာရပ် ဖြစ်ပါသည်။ ဆောက်လုပ်ရေးနှင့် မြို့ပြဖွံ့ဖြိုးရေး လုပ်ငန်းများတွင် အဓိက လုပ်ကိုင်ရပါသည်။

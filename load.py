@@ -18,7 +18,7 @@ def load_FAISS_index(faiss_name):
 def get_context(index_path, question, sample_prompt, chat_history):
     vectors = load_FAISS_index(index_path)
     document_chain=create_stuff_documents_chain(llm,sample_prompt)
-    retriever=vectors.as_retriever()
+    retriever=vectors.as_retriever(search_kwargs={"k": 5})
 
     retrieval_chain=create_retrieval_chain(retriever,document_chain)
     response=retrieval_chain.invoke({'input':question, "chat_history": chat_history})
