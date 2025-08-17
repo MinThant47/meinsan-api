@@ -48,7 +48,7 @@ async def upload_audio(file: UploadFile = File(...)):
     if result:
         chat_history.append(HumanMessage(content=recognized_text))
         chat_history.append(AIMessage(content=result['response']['answer']))
-        save_chat_to_redis(chat_history)
+        save_chat_to_redis(chat_history[-10:])
         print("Response finished")
         
         generate_tts_audio(

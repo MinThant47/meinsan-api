@@ -44,4 +44,4 @@ if final_text:
         st.session_state.chat_history.append(AIMessage(content=result['response']['answer']))
 
 
-        save_chat_to_redis(st.session_state.chat_history)
+        save_chat_to_redis(st.session_state.chat_history[-10:])
