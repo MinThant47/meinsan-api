@@ -4,6 +4,7 @@ import wave
 from dotenv import load_dotenv
 from pydub import AudioSegment
 import os
+import time
 
 load_dotenv()
 
@@ -22,32 +23,49 @@ def save_wave_file(filename, pcm, channels=1, rate=24000, sample_width=2):
         wf.writeframes(pcm)
 
 # Try generating TTS audio with a given key
-def try_generate_tts(api_key, text, voice_name, output_filename):
-    try:
-        client = genai.Client(api_key=api_key)
-        response = client.models.generate_content(
-            model="gemini-2.5-flash-preview-tts",
-            contents=text,
-            config=types.GenerateContentConfig(
-                response_modalities=["AUDIO"],
-                speech_config=types.SpeechConfig(
-                    voice_config=types.VoiceConfig(
-                        prebuilt_voice_config=types.PrebuiltVoiceConfig(
-                            voice_name=voice_name,
+def try_generate_tts(api_key, text, voice_name, output_filename, max_retries=3):
+    for attempt in range(1, max_retries + 1):
+        try:
+            client = genai.Client(api_key=api_key)
+            response = client.models.generate_content(
+                model="gemini-2.5-flash-preview-tts",
+                contents=text,
+                config=types.GenerateContentConfig(
+                    response_modalities=["AUDIO"],
+                    speech_config=types.SpeechConfig(
+                        voice_config=types.VoiceConfig(
+                            prebuilt_voice_config=types.PrebuiltVoiceConfig(
+                                voice_name=voice_name,
+                            )
                         )
-                    )
-                ),
+                    ),
+                )
             )
-        )
-        pcm_data = response.candidates[0].content.parts[0].inline_data.data
-        save_wave_file(f"{output_filename}.wav", pcm_data)
-        audio = AudioSegment.from_wav(f"{output_filename}.wav")
-        audio.export(f"{output_filename}.mp3", format="mp3", bitrate="32k")
-        print(f"Audio saved to: {output_filename}.mp3")
-        return True
-    except Exception as e:
-        print(f"API key failed: {api_key[:5]}..., reason: {e}")
-        return False
+
+            if (
+                not response or
+                not response.candidates or
+                not response.candidates[0].content or
+                not response.candidates[0].content.parts or
+                not hasattr(response.candidates[0].content.parts[0], "inline_data") or
+                not response.candidates[0].content.parts[0].inline_data.data
+            ):
+                raise ValueError("No audio generated (missing content or inline_data).")
+            
+            pcm_data = response.candidates[0].content.parts[0].inline_data.data
+            save_wave_file(f"{output_filename}.wav", pcm_data)
+            audio = AudioSegment.from_wav(f"{output_filename}.wav")
+            audio.export(f"{output_filename}.mp3", format="mp3", bitrate="32k")
+            print(f"Audio saved to: {output_filename}.mp3")
+            return True
+        
+        except Exception as e:
+            print(f"[Attempt {attempt}] API key failed: {api_key[:5]}..., reason: {e}")
+            if attempt < max_retries:
+                time.sleep(0.1)  # Optional delay before retry
+            else:
+                return False
+        
 
 # Main function that tries multiple API keys
 def generate_tts_audio(text, voice_name='Leda', output_filename='output'):
@@ -55,5 +73,3 @@ def generate_tts_audio(text, voice_name='Leda', output_filename='output'):
         if key and try_generate_tts(key, text, voice_name, output_filename):
             return  # Success
     raise RuntimeError("All API keys failed or no key is configured.")
-
-print("Here")
