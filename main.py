@@ -3,15 +3,15 @@ from fastapi.responses import FileResponse
 from schema import chatbot
 from langchain.schema import HumanMessage, AIMessage
 from get_chathistory import save_chat_to_redis, load_chat_from_redis
-# import speech_recognition as sr
-from audio_transcribe import transcribe_audio
+import speech_recognition as sr
+# from audio_transcribe import transcribe_audio
 # from tts_func import run_tts_pipeline
 from aigooglestudio import generate_tts_audio
 import shutil
 import os
 
 app = FastAPI()
-# recognizer = sr.Recognizer()
+recognizer = sr.Recognizer()
 
 @app.get("/")
 def home():
@@ -25,16 +25,16 @@ async def upload_audio(file: UploadFile = File(...)):
         shutil.copyfileobj(file.file, buffer)
     
     try:
-        # with sr.AudioFile("temp.wav") as source:
-        #     audio_data = recognizer.record(source)
-        #     recognized_text = recognizer.recognize_google(audio_data, language="my-MM")
-        recognized_text = transcribe_audio("temp.wav")
+        with sr.AudioFile("temp.wav") as source:
+            audio_data = recognizer.record(source)
+            recognized_text = recognizer.recognize_google(audio_data, language="my-MM")
+        # recognized_text = transcribe_audio("temp.wav")
     except Exception as e:
         os.remove("temp.wav")
         return {
             "status": "failed",
-            "response_text": f"I am sorry, I don't understand the audio. {e}",
-            "command": "stop"
+            "response_text": f"{e}",
+            "command": "inaudible"
         }
 
     os.remove("temp.wav")

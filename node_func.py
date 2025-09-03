@@ -98,9 +98,21 @@ def process_multiple_queries(state: State) -> State:
                 question_msg = HumanMessage(content=question)
                 system_message = SystemMessage(content="You are a fun physical robot who responds with sound actively when you ask me to move closer or step back or spin around. You can be also requested to smile or show a sad face or an angry face! Please Reply Only in Burmese!")
                 
-                response = {"input": question_msg, "answer": llm.invoke([system_message, question_msg]).content}
+                # response = {"input": question_msg, "answer": llm.invoke([system_message, question_msg]).content}
+                
                 classifier = command_router.invoke({"question": question_msg})
                 
+                if(classifier.datasource == "forward"):
+                    response = {"input": question_msg, "answer": "ဘာအကြောင်းရှိလို့ ရှေ့တိုးလာရမှာ"}
+                elif(classifier.datasource == "backward"):
+                    response = {"input": question_msg, "answer": "နောက်မဆုတ်တော့ မင်းအပူပါလား"}
+                elif(classifier.datasource == "smile"):
+                    response = {"input": question_msg, "answer": "သူမ အပြုံးလောက်တော့ ဘယ်ချိုမလဲ"}
+                elif(classifier.datasource == "sad"):
+                    response = {"input": question_msg, "answer": "နေရင်းထိုင်ရင်း ဝမ်းနည်းပြရဦးမယ်"}
+                elif(classifier.datasource == "angry"):
+                    response = {"input": question_msg, "answer": "ဂါးးးးး ဒေါသက အလိုလိုထွက်နေတာ"}
+
                 responses.append(response)
                 commands.append(classifier.datasource)
                 

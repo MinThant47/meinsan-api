@@ -38,10 +38,10 @@ if final_text:
         st.chat_message('ai').markdown(result['response']['answer'])
         message = {'human': final_text, 'AI': result['response']['answer']}
         st.session_state.msg_to_show.append(message)
-        # st.write(result['command'])
 
         st.session_state.chat_history.append(HumanMessage(content=final_text))
         st.session_state.chat_history.append(AIMessage(content=result['response']['answer']))
+    
 
 
         save_chat_to_redis(st.session_state.chat_history[-10:])
