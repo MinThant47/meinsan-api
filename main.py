@@ -50,15 +50,15 @@ async def upload_audio(file: UploadFile = File(...)):
         chat_history.append(AIMessage(content=result['response']['answer']))
         save_chat_to_redis(chat_history[-10:])
         print("Response finished")
-        
-        generate_tts_audio(
-            text = result['response']['answer'],
-            voice_name="Leda",
-            output_filename="response",
-        )
+
+        if (result['command'] == 'stop'):
+            generate_tts_audio(
+                text = result['response']['answer'],
+                voice_name="Leda",
+                output_filename="response",
+            )
         
         # run_tts_pipeline(result['response']['answer'])
-
 
     return {
         "status": "success",
