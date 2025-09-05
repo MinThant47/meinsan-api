@@ -103,15 +103,15 @@ def process_multiple_queries(state: State) -> State:
                 classifier = command_router.invoke({"question": question_msg})
                 
                 if(classifier.datasource == "forward"):
-                    response = {"input": question_msg, "answer": "ဘာအကြောင်းရှိလို့ ရှေ့တိုးလာရမှာ"}
+                    response = {"input": question_msg, "answer": "လာနေပြီ ဘေးကို ဘေးကို ဝှီး ဝှီး"}
                 elif(classifier.datasource == "backward"):
-                    response = {"input": question_msg, "answer": "နောက်မဆုတ်တော့ မင်းအပူပါလား"}
+                    response = {"input": question_msg, "answer": "ဟိတ် နောက်ဆုတ်လာပြီနော် တီ တီ"}
                 elif(classifier.datasource == "smile"):
-                    response = {"input": question_msg, "answer": "သူမ အပြုံးလောက်တော့ ဘယ်ချိုမလဲ"}
+                    response = {"input": question_msg, "answer": "ဟီး ဟီး"}
                 elif(classifier.datasource == "sad"):
-                    response = {"input": question_msg, "answer": "နေရင်းထိုင်ရင်း ဝမ်းနည်းပြရဦးမယ်"}
+                    response = {"input": question_msg, "answer": "မေးတာတွေများတော့ စိတ်ညစ်လာပြီ"}
                 elif(classifier.datasource == "angry"):
-                    response = {"input": question_msg, "answer": "ဂါးးးးး ဒေါသက အလိုလိုထွက်နေတာ"}
+                    response = {"input": question_msg, "answer": "ဘာမှ လာမမေးနဲ့ ဒါပဲ ဟွန့်"}
 
                 responses.append(response)
                 commands.append(classifier.datasource)
