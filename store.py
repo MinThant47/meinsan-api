@@ -27,4 +27,4 @@ def vector_embedding(file_path, name):
 vectors = vector_embedding(r"files\YTUFAQ.txt","YTUFAQ")
 vectors2 = vector_embedding(r"files\YTUHostel.txt","YTUHostel")
 # vectors3 = vector_embedding(r"files\YTUExam.txt","YTUExam")
-vectors4 = vector_embedding(r"files\YTUMajors.txt","YTUMajors")
+# vectors4 = vector_embedding(r"files\YTUMajors.txt","YTUMajors")
