@@ -1,4 +1,4 @@
-langchain
+langchain==0.0.208
 langchain-core
 langchain-community
 langchain-google-genai
