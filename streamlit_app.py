@@ -3,7 +3,7 @@ loop = asyncio.new_event_loop()
 asyncio.set_event_loop(loop)
 
 import streamlit as st
-from langchain.schema import HumanMessage, AIMessage
+from langchain_core.messages import HumanMessage, AIMessage
 from schema import chatbot
 from get_chathistory import save_chat_to_redis, load_chat_from_redis
 

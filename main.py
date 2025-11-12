@@ -1,7 +1,7 @@
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import FileResponse
 from schema import chatbot
-from langchain.schema import HumanMessage, AIMessage
+from langchain_core.messages import HumanMessage, AIMessage
 from get_chathistory import save_chat_to_redis, load_chat_from_redis
 import speech_recognition as sr
 # from audio_transcribe import transcribe_audio

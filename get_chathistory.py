@@ -8,7 +8,7 @@ load_dotenv()
 #aungkyawkyawsoe
 redis = Redis(url=os.getenv("REDIS_URL"), token=os.getenv("REDIS_TOKEN"))
 
-from langchain.schema import HumanMessage, AIMessage
+from langchain_core.messages import HumanMessage, AIMessage
 
 CHAT_KEY = os.getenv("REDIS_CHAT_KEY")
 

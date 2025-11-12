@@ -1,7 +1,7 @@
 # Enhanced node_func.py with multi-query support
 
 from langchain_core.prompts import ChatPromptTemplate
-from langchain.schema import HumanMessage, SystemMessage, BaseMessage
+from langchain_core.messages import HumanMessage, SystemMessage, BaseMessage
 from llm_and_route_query import llm, question_router, command_router, prompt, question_splitter, combine_responses
 from typing_extensions import TypedDict, List
 from load import get_context
