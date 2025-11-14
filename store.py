@@ -1,4 +1,4 @@
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_classic.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
 from langchain_community.document_loaders import TextLoader
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
@@ -10,7 +10,8 @@ os.environ["GOOGLE_API_KEY"]
 
 def vector_embedding(file_path, name):
 
-    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
+    embeddings = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
+
     loader = TextLoader(file_path, encoding='utf-8')
     docs=loader.load()
 
@@ -26,5 +27,5 @@ def vector_embedding(file_path, name):
 
 vectors = vector_embedding(r"files\YTUFAQ.txt","YTUFAQ")
 vectors2 = vector_embedding(r"files\YTUHostel.txt","YTUHostel")
-# vectors3 = vector_embedding(r"files\YTUExam.txt","YTUExam")
-# vectors4 = vector_embedding(r"files\YTUMajors.txt","YTUMajors")
+vectors3 = vector_embedding(r"files\YTUExam.txt","YTUExam")
+vectors4 = vector_embedding(r"files\YTUMajors.txt","YTUMajors")

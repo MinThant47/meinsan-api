@@ -2,6 +2,7 @@ from langchain_classic.chains.combine_documents import create_stuff_documents_ch
 from langchain_classic.chains.retrieval import create_retrieval_chain
 from langchain_community.vectorstores import FAISS
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
+
 from llm_and_route_query import llm
 import os
 from dotenv import load_dotenv
@@ -9,7 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 os.environ["GOOGLE_API_KEY"]
 
-embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
+embeddings = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
 
 def load_FAISS_index(faiss_name):
     vectors = FAISS.load_local("faiss_index", embeddings, faiss_name, allow_dangerous_deserialization=True)

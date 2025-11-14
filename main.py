@@ -4,8 +4,6 @@ from schema import chatbot
 from langchain_core.messages import HumanMessage, AIMessage
 from get_chathistory import save_chat_to_redis, load_chat_from_redis
 import speech_recognition as sr
-# from audio_transcribe import transcribe_audio
-# from tts_func import run_tts_pipeline
 from aigooglestudio import generate_tts_audio
 import shutil
 import os
